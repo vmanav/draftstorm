@@ -11,35 +11,43 @@ const Chat = ({ location }) => {
 
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
+  const [wlcmMsg, setWlcmMsg] = useState("");
+  const [userNotf, setUserNotf] = useState("");
+
 
   useEffect(() => {
-
     const { room, user } = queryString.parse(location.search);
-
-    socket = socketIOClient(ENDPOINT);
-
     setRoom(room);
     setName(user);
 
+    socket = socketIOClient(ENDPOINT);
 
     socket.emit('joinRoom', {
       userName: user,
       roomName: room
+    }, () => {
     })
 
-    return (() => {
-      socket.emit('disconnect');
-      socket.off();
-    })
-
-    // socket.emit('sendAll', {
-    //   msg: 'for all'
+    // // cleanup
+    // return (() => {
+    //   socket.emit('disconnect');
+    //   socket.off();
     // })
 
-    // socket.on('tPortAll', (data) => {
-    //   console.log("CLIENT KO MILA : ", data);
-    // })
+    // socket.emit('sendAll', {  msg: 'for all'})
   }, [location.search])
+
+  useEffect(() => {
+    socket.on('selfWelcome', (data) => {
+      console.log("selfWelcome ka Data : ", data)
+    })
+  }, [wlcmMsg])
+
+  useEffect(() => {
+    socket.on('userNotification', (data) => {
+      console.log("userNotification ka Data : ", data)
+    })
+  }, [userNotf])
 
   return (
     <h1>Chat</h1>

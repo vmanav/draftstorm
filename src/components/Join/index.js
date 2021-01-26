@@ -23,7 +23,7 @@ const Join = () => {
         <div>
           <input type="text" placeholder="Room" className="roomInput" onChange={(e) => setRoom(e.target.value)} />
         </div>
-        <Link onclick={(e) => handleClick(e)} to={`/chat?room=${room}&user=${name}`}>
+        <Link onClick={(e) => handleClick(e)} to={`/chat?room=${room}&user=${name}`}>
           <button className="button mt-20" type="submit">Sign In</button>
         </Link>
       </div>
