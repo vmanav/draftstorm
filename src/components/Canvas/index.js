@@ -13,26 +13,45 @@ const Canvas = (props) => {
 
   const canvasRef = useRef(null);
 
+  const handleResize = () => {
+
+    // console.log("handleResize called.");
+    const canvas = canvasRef.current
+    const ctx = canvas.getContext('2d');
+    // ctx.canvas.width = 0.95 * window.innerWidth;
+    // ctx.canvas.height = 0.95 * window.innerHeight;
+    ctx.canvas.width = canvas.parentElement.clientWidth;
+    ctx.canvas.height = canvas.parentElement.clientHeight;
+
+  }
+
   // const clearCanvas = () => {
   //   const canvas = canvasRef.current
-  //   const context = canvas.getContext('2d');
-  //   context.clearRect(0, 0, canvas.width, canvas.height);
+  //   const ctx = canvas.getContext('2d');
+  //   ctx.clearRect(0, 0, canvas.width, canvas.height);
   // }
 
   useEffect(() => {
     console.log("rect vala useEff called.");
     const canvas = canvasRef.current
-    const context = canvas.getContext('2d');
-    console.log("Window : ", window);
-    context.canvas.width = .999 * window.innerWidth;
-    context.canvas.height = .998 * window.innerHeight;
+    console.log("URGENT ++++++++++++ => ", canvas.parentElement.clientWidth);
 
-    console.log("Info : ", context.canvas);
+
+    const ctx = canvas.getContext('2d');
+    console.log("Window : ", window);
+    // ctx.canvas.width = 0.95 * window.innerWidth;
+    // ctx.canvas.height = 0.95 * window.innerHeight;
+    ctx.canvas.width = canvas.parentElement.clientWidth;
+    ctx.canvas.height = canvas.parentElement.clientHeight;
+
+    console.log("Info : ", ctx.canvas);
 
     // //Our first draw
-    context.fillStyle = '#000000'
-    context.fillRect(15, 0, context.canvas.width / 7, context.canvas.height)
+    ctx.fillStyle = '#000000'
+    ctx.fillRect(15, 0, ctx.canvas.width / 7, ctx.canvas.height)
 
+
+    window.addEventListener('resize', handleResize)
   }, [])
 
   const handleMouseDown = (e) => {
@@ -103,16 +122,15 @@ const Canvas = (props) => {
   }, [socket])
 
 
-
-
   return (
     <>
       <canvas
         style={{
-          border: '1px solid black',
+          // border: '1px solid black',
           // width: '90vw',
           // height: '80vh',
-          backgroundColor: 'pink'
+          backgroundColor: 'pink',
+          // position: 'absolute'
         }}
         onMouseDown={(e) => handleMouseDown(e)}
         onMouseMove={(e) => handleMouseMove(e)}

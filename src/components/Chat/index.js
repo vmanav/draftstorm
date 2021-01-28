@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, createRef } from 'react';
 import { BrowserRouter as Redirect } from 'react-router-dom';
 import socketIOClient from 'socket.io-client';
 import queryString from 'query-string';
 import Canvas from '../Canvas';
+import { Row, Col } from 'antd';
+
+import 'antd/dist/antd.css';
 import './index.css';
 
 const ENDPOINT = 'http://127.0.0.1:5000';
@@ -53,6 +56,7 @@ const Chat = ({ location, history, match }) => {
     // socket.emit('sendAll', {  msg: 'for all'})
   }, [match.action, location.search])
 
+
   useEffect(() => {
     socket.on('selfWelcome', (data) => {
       setWlcmMsg(data.text);
@@ -76,21 +80,32 @@ const Chat = ({ location, history, match }) => {
     return (
       <>
         {/* <h1>Chat</h1> */}
-        {sktLoaded ? (<Canvas socket={socket} />) : (<>NO CANVAS</>)}
+        {sktLoaded ?
+          (
+            <Row
+              justify="center"
+              style={{
+                backgroundColor: "lightblue",
+                padding: 20,
+                height: '100vh'
+              }}
+            >
+              <Col
+                span={22}
+                style={{ backgroundColor: "lightcoral" }}
+              // ref={}
+              >
+                <Canvas socket={socket}
+                // ref={someRef}
+                />
+              </Col>
+            </Row>
+          )
+          :
+          (<>NO CANVAS</>)}
       </>
     )
   }
-
-  // return (
-  //   <>
-  //     <h1>Chat</h1>
-  //     {error ? (<Redirect to="/" />) : (<></>)
-  //     }
-  //     {/* {
-  //       sktLoaded ? (<Canvas socket={socket} />) : (<>NO CANVAS</>)
-  //     } */}
-  //   </>
-  // );
 }
 
 export default Chat;
