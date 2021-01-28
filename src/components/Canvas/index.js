@@ -1,27 +1,33 @@
 import React, { useRef, useEffect } from 'react';
+import styled from "styled-components";
 
 const strokeColour = "black";
 const lineWidth = 1;
 
 const Canvas = (props) => {
+
   let prevX, prevY, currX, currY;
   let pressed = false;
   let { socket } = props;
-  console.log("SOCKET : ", socket)
+  console.log("SOCKET : ", socket);
 
   const canvasRef = useRef(null);
 
-  const clearCanvas = () => {
-    const canvas = canvasRef.current
-    const context = canvas.getContext('2d');
-    context.clearRect(0, 0, canvas.width, canvas.height);
-  }
+  // const clearCanvas = () => {
+  //   const canvas = canvasRef.current
+  //   const context = canvas.getContext('2d');
+  //   context.clearRect(0, 0, canvas.width, canvas.height);
+  // }
 
   useEffect(() => {
     console.log("rect vala useEff called.");
     const canvas = canvasRef.current
-    const context = canvas.getContext('2d')
-    // console.log("Info : ", context.canvas);
+    const context = canvas.getContext('2d');
+    console.log("Window : ", window);
+    context.canvas.width = .999 * window.innerWidth;
+    context.canvas.height = .998 * window.innerHeight;
+
+    console.log("Info : ", context.canvas);
 
     // //Our first draw
     context.fillStyle = '#000000'
@@ -30,6 +36,7 @@ const Canvas = (props) => {
   }, [])
 
   const handleMouseDown = (e) => {
+
     const canvas = canvasRef.current
     pressed = true;
     prevX = e.pageX - canvas.offsetLeft;
@@ -41,6 +48,33 @@ const Canvas = (props) => {
       strokeColour: strokeColour,
       lineWidth: lineWidth
     })
+  }
+
+  const handleMouseMove = (e) => {
+
+    const canvas = canvasRef.current
+    if (pressed) {
+      currX = e.pageX - canvas.offsetLeft;
+      currY = e.pageY - canvas.offsetTop;
+
+      socket.emit('c_mouse_move', {
+        prevX: prevX,
+        prevY: prevY,
+        currX: currX,
+        currY: currY
+      })
+      prevX = currX;
+      prevY = currY;
+    }
+  }
+
+  const handleMouseUp = () => {
+    console.log("pressed : ", pressed);
+    pressed = false;
+  }
+
+  const handleMouseOut = () => {
+    pressed = false;
   }
 
   useEffect(() => {
@@ -57,6 +91,15 @@ const Canvas = (props) => {
       ctx.lineTo(payload.prevX, payload.prevY);
       ctx.stroke();
     })
+
+
+    socket.on('s_mouse_move', (payload) => {
+
+      ctx.moveTo(payload.prevX, payload.prevY);
+      ctx.lineTo(payload.currX, payload.currY);
+      ctx.stroke();
+    })
+
   }, [socket])
 
 
@@ -65,11 +108,20 @@ const Canvas = (props) => {
   return (
     <>
       <canvas
+        style={{
+          border: '1px solid black',
+          // width: '90vw',
+          // height: '80vh',
+          backgroundColor: 'pink'
+        }}
         onMouseDown={(e) => handleMouseDown(e)}
+        onMouseMove={(e) => handleMouseMove(e)}
+        onMouseUp={handleMouseUp}
+        onMouseOut={handleMouseOut}
         ref={canvasRef}
         {...props}
       ></canvas>
-      <button onClick={clearCanvas}>Clear Canvas</button>
+      {/* <button onClick={clearCanvas}>Clear Canvas</button> */}
     </>
   );
 }

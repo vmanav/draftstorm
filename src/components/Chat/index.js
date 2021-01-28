@@ -75,8 +75,8 @@ const Chat = ({ location, history, match }) => {
   } else {
     return (
       <>
-        <h1>Chat</h1>
-        {/* {sktLoaded ? (<Canvas socket={socket} />) : (<>NO CANVAS</>)} */}
+        {/* <h1>Chat</h1> */}
+        {sktLoaded ? (<Canvas socket={socket} />) : (<>NO CANVAS</>)}
       </>
     )
   }
