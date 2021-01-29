@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import styled from "styled-components";
+import ToolKit from '../ToolKit';
 
 const strokeColour = "black";
 const lineWidth = 1;
@@ -180,6 +181,7 @@ const Canvas = (props) => {
         style={{ display: 'none' }}
       >
       </canvas>
+      <ToolKit />
       {/* <button onClick={clearCanvas}>Clear Canvas</button> */}
     </>
   );
