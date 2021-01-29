@@ -20,6 +20,7 @@ const Canvas = (props) => {
     console.log("handleResize called.");
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
+
     // console.log("=> ctx", ctx);
 
     var memCanvas = memCanvasRef.current;
@@ -63,6 +64,7 @@ const Canvas = (props) => {
   // }
 
   useEffect(() => {
+
     // console.log("rect vala useEff called.");
     const canvas = canvasRef.current
     // console.log("URGENT ++++++++++++ => ", canvas.parentElement.clientWidth);
@@ -78,8 +80,8 @@ const Canvas = (props) => {
     // console.log("Info : ", ctx.canvas);
 
     // //Our first draw
-    ctx.fillStyle = '#000000'
-    ctx.fillRect(15, 0, ctx.canvas.width / 7, ctx.canvas.height)
+    // ctx.fillStyle = '#000000'
+    // ctx.fillRect(15, 0, ctx.canvas.width / 7, ctx.canvas.height)
 
 
     window.addEventListener('resize', handleResize);
@@ -159,10 +161,10 @@ const Canvas = (props) => {
     <>
       <canvas
         style={{
-          // border: '1px solid black',
-          // width: '90vw',
-          // height: '80vh',
-          backgroundColor: 'pink',
+          border: '1px solid red',
+          width: '100vw',
+          height: '100vh',
+          backgroundColor: '#f7ede2',
           // position: 'absolute'
         }}
         onMouseDown={(e) => handleMouseDown(e)}
@@ -184,12 +186,3 @@ const Canvas = (props) => {
 }
 
 export default Canvas;
-
-  // const [name, setName] = useState("");
-  // const [room, setRoom] = useState("");
-
-  // const handleClick = (e) => {
-  //   if (name === "" || room === "") {
-  //     e.preventDefault();
-  //   }
-  // }

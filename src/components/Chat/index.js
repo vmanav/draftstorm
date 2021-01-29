@@ -83,26 +83,7 @@ const Chat = ({ location, history, match }) => {
       <>
         {/* <h1>Chat</h1> */}
         {sktLoaded ?
-          (
-            <Row
-              justify="center"
-              style={{
-                backgroundColor: "lightblue",
-                padding: 20,
-                height: '100vh'
-              }}
-            >
-              <Col
-                span={22}
-                style={{ backgroundColor: "lightcoral" }}
-              // ref={}
-              >
-                <Canvas socket={socket}
-                // ref={someRef}
-                />
-              </Col>
-            </Row>
-          )
+          (<Canvas socket={socket} />)
           :
           (<>NO CANVAS</>)}
       </>
