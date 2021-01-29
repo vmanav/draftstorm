@@ -13,9 +13,9 @@ const ENDPOINT = 'http://127.0.0.1:5000';
 let socket;
 
 const Chat = ({ location, history, match }) => {
-  console.log("location : ", location);
-  console.log("history : ", history);
-  console.log("match : ", match);
+  // console.log("location : ", location);
+  // console.log("history : ", history);
+  // console.log("match : ", match);
 
 
   const [user, setName] = useState("");
@@ -27,7 +27,7 @@ const Chat = ({ location, history, match }) => {
 
 
   useEffect(() => {
-    console.log("useEffect called");
+    // console.log("useEffect called");
 
     const { room, user } = queryString.parse(location.search);
     setRoom(room);
@@ -41,8 +41,10 @@ const Chat = ({ location, history, match }) => {
       roomName: room
     }, (err) => {
       if (err) {
+
+        // STILL PROBLEM WITH REDURECT
         // alert(err);
-        console.log("REDIRECT NOW ?");
+        // console.log("REDIRECT NOW ?");
         setRedirect(true);
       }
     })
@@ -61,7 +63,7 @@ const Chat = ({ location, history, match }) => {
     socket.on('selfWelcome', (data) => {
       setWlcmMsg(data.text);
       // alert(data.text);
-      console.log("selfWelcome : ", data.text);
+      // console.log("selfWelcome : ", data.text);
     })
   }, [wlcmMsg])
 
@@ -69,12 +71,12 @@ const Chat = ({ location, history, match }) => {
     socket.on('userNotification', (data) => {
       setUserNotf(data.text);
       // alert(data.text);
-      console.log("userNotification : ", data.text);
+      // console.log("userNotification : ", data.text);
     })
   }, [userNotf])
 
   if (redirect) {
-    console.log("redirect to true hai")
+    // console.log("redirect to true hai")
     return (<Redirect to="/hi" />);
   } else {
     return (

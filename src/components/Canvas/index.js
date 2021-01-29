@@ -9,19 +9,50 @@ const Canvas = (props) => {
   let prevX, prevY, currX, currY;
   let pressed = false;
   let { socket } = props;
-  console.log("SOCKET : ", socket);
+  // console.log("SOCKET : ", socket);
 
   const canvasRef = useRef(null);
+  const memCanvasRef = useRef(null);
+
 
   const handleResize = () => {
 
-    // console.log("handleResize called.");
-    const canvas = canvasRef.current
+    console.log("handleResize called.");
+    const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
+    // console.log("=> ctx", ctx);
+
+    var memCanvas = memCanvasRef.current;
+    var memCtx = memCanvas.getContext('2d');
+
+
+    let oldWidth = canvas.width;
+    let oldHeight = canvas.height;
+    let newWidth = canvas.parentElement.clientWidth;
+    let newHeight = canvas.parentElement.clientHeight;
+
+
+    // Change Memory Canvas Width
+    memCanvas.width = newWidth;
+    memCanvas.height = newHeight;
+    // Redraw Memory Canvas
+    memCtx.scale(newWidth / oldWidth, newHeight / oldHeight);
+    memCtx.drawImage(canvas, 0, 0);
+    // memCtx.scale(newWidth / oldWidth, newHeight / oldHeight);
+    // console.log("SCALE VALUES : ", newWidth / oldWidth, " and ", newHeight / oldHeight)
+
+    // Now Change Original Canvas
+    canvas.width = newWidth;
+    canvas.height = newHeight;
+    ctx.drawImage(memCanvas, 0, 0);
+
+
     // ctx.canvas.width = 0.95 * window.innerWidth;
     // ctx.canvas.height = 0.95 * window.innerHeight;
-    ctx.canvas.width = canvas.parentElement.clientWidth;
-    ctx.canvas.height = canvas.parentElement.clientHeight;
+
+
+    // ctx.canvas.width = canvas.parentElement.clientWidth;
+    // ctx.canvas.height = canvas.parentElement.clientHeight;
 
   }
 
@@ -32,34 +63,36 @@ const Canvas = (props) => {
   // }
 
   useEffect(() => {
-    console.log("rect vala useEff called.");
+    // console.log("rect vala useEff called.");
     const canvas = canvasRef.current
-    console.log("URGENT ++++++++++++ => ", canvas.parentElement.clientWidth);
+    // console.log("URGENT ++++++++++++ => ", canvas.parentElement.clientWidth);
 
 
     const ctx = canvas.getContext('2d');
-    console.log("Window : ", window);
+    // console.log("Window : ", window);
     // ctx.canvas.width = 0.95 * window.innerWidth;
     // ctx.canvas.height = 0.95 * window.innerHeight;
     ctx.canvas.width = canvas.parentElement.clientWidth;
     ctx.canvas.height = canvas.parentElement.clientHeight;
 
-    console.log("Info : ", ctx.canvas);
+    // console.log("Info : ", ctx.canvas);
 
     // //Our first draw
     ctx.fillStyle = '#000000'
     ctx.fillRect(15, 0, ctx.canvas.width / 7, ctx.canvas.height)
 
 
-    window.addEventListener('resize', handleResize)
+    window.addEventListener('resize', handleResize);
   }, [])
 
   const handleMouseDown = (e) => {
 
+
     const canvas = canvasRef.current
+    // console.log("canvas.offsetLeft : ", canvas.getBoundingClientRect().left)
     pressed = true;
-    prevX = e.pageX - canvas.offsetLeft;
-    prevY = e.pageY - canvas.offsetTop;
+    prevX = e.pageX - canvas.getBoundingClientRect().left;
+    prevY = e.pageY - canvas.getBoundingClientRect().top;
 
     socket.emit('c_mouse_down', {
       prevX: prevX,
@@ -73,8 +106,8 @@ const Canvas = (props) => {
 
     const canvas = canvasRef.current
     if (pressed) {
-      currX = e.pageX - canvas.offsetLeft;
-      currY = e.pageY - canvas.offsetTop;
+      currX = e.pageX - canvas.getBoundingClientRect().left;
+      currY = e.pageY - canvas.getBoundingClientRect().top;
 
       socket.emit('c_mouse_move', {
         prevX: prevX,
@@ -139,6 +172,12 @@ const Canvas = (props) => {
         ref={canvasRef}
         {...props}
       ></canvas>
+      <canvas
+        id="memCanvas"
+        ref={memCanvasRef}
+        style={{ display: 'none' }}
+      >
+      </canvas>
       {/* <button onClick={clearCanvas}>Clear Canvas</button> */}
     </>
   );
