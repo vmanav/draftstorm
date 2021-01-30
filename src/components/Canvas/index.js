@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import styled from "styled-components";
 import ToolKit from '../ToolKit';
 
-// const strokeColour = "black";
+const shadowBlurValue = 4;
 
 const Canvas = (props) => {
 
@@ -14,9 +14,9 @@ const Canvas = (props) => {
   const canvasRef = useRef(null);
   const memCanvasRef = useRef(null);
 
-
   const [strokeColour, setStrokeColour] = useState("#141414");
   const [lineWidth, setLineWidth] = useState(1);
+  const [shadowBlur, setShadowBlur] = useState(false);
 
 
   const handleResize = () => {
@@ -55,7 +55,6 @@ const Canvas = (props) => {
     // ctx.canvas.width = 0.95 * window.innerWidth;
     // ctx.canvas.height = 0.95 * window.innerHeight;
 
-
     // ctx.canvas.width = canvas.parentElement.clientWidth;
     // ctx.canvas.height = canvas.parentElement.clientHeight;
 
@@ -69,30 +68,18 @@ const Canvas = (props) => {
 
   useEffect(() => {
 
-    // console.log("rect vala useEff called.");
     const canvas = canvasRef.current
-    // console.log("URGENT ++++++++++++ => ", canvas.parentElement.clientWidth);
-
 
     const ctx = canvas.getContext('2d');
-    // console.log("Window : ", window);
-    // ctx.canvas.width = 0.95 * window.innerWidth;
-    // ctx.canvas.height = 0.95 * window.innerHeight;
+
     ctx.canvas.width = canvas.parentElement.clientWidth;
     ctx.canvas.height = canvas.parentElement.clientHeight;
-
-    // console.log("Info : ", ctx.canvas);
-
-    // //Our first draw
-    // ctx.fillStyle = '#000000'
-    // ctx.fillRect(15, 0, ctx.canvas.width / 7, ctx.canvas.height)
 
 
     window.addEventListener('resize', handleResize);
   }, [])
 
   const handleMouseDown = (e) => {
-
 
     const canvas = canvasRef.current
     // console.log("canvas.offsetLeft : ", canvas.getBoundingClientRect().left)
@@ -104,7 +91,8 @@ const Canvas = (props) => {
       prevX: prevX,
       prevY: prevY,
       strokeColour: strokeColour,
-      lineWidth: lineWidth
+      lineWidth: lineWidth,
+      shadowBlur: shadowBlur
     })
   }
 
@@ -142,6 +130,9 @@ const Canvas = (props) => {
 
     socket.on('s_mouse_down', (payload) => {
       // console.log("stroke colour jo mila ", payload.strokeColour)
+      ctx.lineJoin = ctx.lineCap = 'round';
+      ctx.shadowBlur = payload.shadowBlur ? shadowBlurValue : 0;
+      ctx.shadowColor = 'rgba(252,163,17, 0.4)';
       ctx.beginPath();
       ctx.moveTo(payload.prevX - 1, payload.prevY - 1);
       ctx.strokeStyle = payload.strokeColour;
@@ -188,9 +179,8 @@ const Canvas = (props) => {
         setStrokeColour={setStrokeColour}
         lineWidth={lineWidth}
         setLineWidth={setLineWidth}
-
+        setShadowBlur={setShadowBlur}
       />
-      {/* <button onClick={clearCanvas}>Clear Canvas</button> */}
     </>
   );
 }

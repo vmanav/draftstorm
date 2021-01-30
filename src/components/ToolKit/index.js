@@ -1,43 +1,30 @@
 import React, { useState } from 'react';
 import Draggable from 'react-draggable';
-import { Card, Menu, Dropdown, Typography, Radio, Button, Select, Divider, Space, Slider, InputNumber } from 'antd';
+import { Card, Menu, Dropdown, Typography, Radio, Button, Select, Divider, Space, Slider, InputNumber, Switch, Tooltip } from 'antd';
 import { ToolOutlined, UserOutlined } from '@ant-design/icons';
 import { FaDotCircle } from "react-icons/fa";
 
 const { Option } = Select;
 
-const gridStyle = {
-  width: '100%',
-  textAlign: 'center',
-};
-
-function handleChange(value) {
-  console.log(`selected ${value}`);
-}
-
-
 const ToolKit = (props) => {
 
-  const { setStrokeColour, lineWidth, setLineWidth } = props;
-
-
-  console.log("setStrokeColour : ", setStrokeColour);
-
+  const { setStrokeColour, setLineWidth, setShadowBlur } = props;
   const [vis, setVis] = useState(false);
 
 
-
-
   const handleStrokeColourChange = (value) => {
-
     // console.log("Changed : ", value);
     setStrokeColour(value);
   }
 
   const handleLineWidthChange = (value) => {
-
     // console.log("Changed : ", value);
     setLineWidth(value);
+  }
+
+  const onHighlightChange = (value) => {
+    // console.log("Changed : ", value);
+    setShadowBlur(value);
   }
 
 
@@ -68,65 +55,53 @@ const ToolKit = (props) => {
 
         {/* StrokeColour */}
         <Space>
-          <Select
-            defaultValue="#141414"
-            style={{
-              width: 120
-            }}
-            onChange={handleStrokeColourChange}
-            dropdownAlign={{
-              offset: [+120, -32]
-            }}
-          >
-            <Option value="#ef233c">
-              <Button shape="circle" size="small" style={{ backgroundColor: "#ef233c", color: "#ef233c", border: 0 }}>.</Button>
-            </Option>
-            <Option value="#56cbf9">
-              <Button shape="circle" size="small" style={{ backgroundColor: "#56cbf9", color: "#56cbf9", border: 0 }}>.</Button>
-            </Option>
-            <Option value="#13c4a3">
-              <Button shape="circle" size="small" style={{ backgroundColor: "#13c4a3", color: "#13c4a3", border: 0 }}>.</Button>
-            </Option>
-            <Option value="#fde74c">
-              <Button shape="circle" size="small" style={{ backgroundColor: "#fde74c", color: "#fde74c", border: 0 }}>.</Button>
-            </Option>
-            <Option value="#6c757d">
-              <Button shape="circle" size="small" style={{ backgroundColor: "#6c757d", color: "#6c757d", border: 0 }}>.</Button>
-            </Option>
-            <Option value="#141414">
-              <Button shape="circle" size="small" style={{ backgroundColor: "#141414", color: "#141414", border: 0 }}>.</Button>
-            </Option>
-          </Select>
+          <Tooltip placement="topRight" title={'Colour'}>
+            <Select
+              defaultValue="#141414"
+              style={{
+                width: 100
+              }}
+              onChange={handleStrokeColourChange}
+              dropdownAlign={{
+                offset: [+100, -32]
+              }}
+            >
+              <Option value="#ef233c">
+                <Button shape="circle" size="small" style={{ backgroundColor: "#ef233c", color: "#ef233c", border: 0 }}>.</Button>
+              </Option>
+              <Option value="#56cbf9">
+                <Button shape="circle" size="small" style={{ backgroundColor: "#56cbf9", color: "#56cbf9", border: 0 }}>.</Button>
+              </Option>
+              <Option value="#13c4a3">
+                <Button shape="circle" size="small" style={{ backgroundColor: "#13c4a3", color: "#13c4a3", border: 0 }}>.</Button>
+              </Option>
+              <Option value="#fde74c">
+                <Button shape="circle" size="small" style={{ backgroundColor: "#fde74c", color: "#fde74c", border: 0 }}>.</Button>
+              </Option>
+              <Option value="#6c757d">
+                <Button shape="circle" size="small" style={{ backgroundColor: "#6c757d", color: "#6c757d", border: 0 }}>.</Button>
+              </Option>
+              <Option value="#141414">
+                <Button shape="circle" size="small" style={{ backgroundColor: "#141414", color: "#141414", border: 0 }}>.</Button>
+              </Option>
+            </Select>
+          </Tooltip>
           <Divider />
         </Space>
 
         {/* lineWidth */}
         <Space>
-          {/* <Radio.Group defaultValue="a" size="small">
-            <Radio.Button value="1">
-              <FaDotCircle size="xs" />
-            </Radio.Button>
-            <Radio.Button value="3">
-              <FaDotCircle size="lg" />
-            </Radio.Button>
-            <Radio.Button value="6">
-              <FaDotCircle />
-            </Radio.Button>
-          </Radio.Group> */}
-          <InputNumber min={1} max={10} defaultValue={1} onChange={handleLineWidthChange} />
+          <Tooltip placement="topRight" title={'Size'}>
+            <InputNumber min={1} max={10} defaultValue={1} onChange={handleLineWidthChange} />
+          </Tooltip>
           <Divider />
         </Space>
 
-
-        {/* <Space> */}
-        {/* <Slider
-          min={1}
-          max={10}
-          onChange={handleLineWidthChange}
-          defaultValue={1}
-        /> */}
-        {/* </Space> */}
-
+        <Space>
+          <Tooltip placement="topRight" title={'Hightlight'}>
+            <Switch onChange={onHighlightChange} size="small" />
+          </Tooltip>
+        </Space>
 
         <p>Card content</p>
       </Card>
