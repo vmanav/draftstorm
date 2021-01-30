@@ -1,8 +1,8 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from "styled-components";
 import ToolKit from '../ToolKit';
 
-const strokeColour = "black";
+// const strokeColour = "black";
 const lineWidth = 1;
 
 const Canvas = (props) => {
@@ -15,6 +15,8 @@ const Canvas = (props) => {
   const canvasRef = useRef(null);
   const memCanvasRef = useRef(null);
 
+
+  const [strokeColour, setStrokeColour] = useState("#141414");
 
   const handleResize = () => {
 
@@ -141,7 +143,7 @@ const Canvas = (props) => {
       // console.log("stroke colour jo mila ", payload.strokeColour)
       ctx.beginPath();
       ctx.moveTo(payload.prevX - 1, payload.prevY - 1);
-      ctx.strokeStyle = payload.strokectxolour;
+      ctx.strokeStyle = payload.strokeColour;
       ctx.lineWidth = payload.lineWidth;
       ctx.lineTo(payload.prevX, payload.prevY);
       ctx.stroke();
@@ -181,7 +183,9 @@ const Canvas = (props) => {
         style={{ display: 'none' }}
       >
       </canvas>
-      <ToolKit />
+      <ToolKit
+        setStrokeColour={setStrokeColour}
+      />
       {/* <button onClick={clearCanvas}>Clear Canvas</button> */}
     </>
   );
