@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import Draggable from 'react-draggable';
-import { Card, Menu, Dropdown, Typography, Radio, Button, Select, Divider, Space } from 'antd';
+import { Card, Menu, Dropdown, Typography, Radio, Button, Select, Divider, Space, Slider, InputNumber } from 'antd';
 import { ToolOutlined, UserOutlined } from '@ant-design/icons';
+import { FaDotCircle } from "react-icons/fa";
+
 const { Option } = Select;
 
 const gridStyle = {
@@ -16,16 +18,26 @@ function handleChange(value) {
 
 const ToolKit = (props) => {
 
-  const { setStrokeColour } = props;
+  const { setStrokeColour, lineWidth, setLineWidth } = props;
+
+
   console.log("setStrokeColour : ", setStrokeColour);
 
   const [vis, setVis] = useState(false);
+
+
 
 
   const handleStrokeColourChange = (value) => {
 
     // console.log("Changed : ", value);
     setStrokeColour(value);
+  }
+
+  const handleLineWidthChange = (value) => {
+
+    // console.log("Changed : ", value);
+    setLineWidth(value);
   }
 
 
@@ -53,27 +65,8 @@ const ToolKit = (props) => {
         style={{ width: 140, borderRadius: 4, position: "absolute", top: 20, left: 15 }}
         className="handle"
       >
-        {/*
-        <Space>
-          <Select
-            defaultValue="lucy"
-            style={{
-              width: 120
-            }}
-            onChange={handleChange}
-            dropdownAlign={{
-              offset: [+120, -32]
-            }}
-          >
-            <Option value="jack">Jack</Option>
-            <Option value="lucy">Lucy</Option>
-            <Option value="disabled" disabled>Disabled</Option>
-            <Option value="Yiminghe">yiminghe</Option>
-          </Select>
-          <Divider />
-        </Space>
-        */}
 
+        {/* StrokeColour */}
         <Space>
           <Select
             defaultValue="#141414"
@@ -97,8 +90,8 @@ const ToolKit = (props) => {
             <Option value="#fde74c">
               <Button shape="circle" size="small" style={{ backgroundColor: "#fde74c", color: "#fde74c", border: 0 }}>.</Button>
             </Option>
-            <Option value="#ffffff">
-              <Button shape="circle" size="small" style={{ backgroundColor: "#ffffff", color: "#ffffff", border: 0 }}>.</Button>
+            <Option value="#6c757d">
+              <Button shape="circle" size="small" style={{ backgroundColor: "#6c757d", color: "#6c757d", border: 0 }}>.</Button>
             </Option>
             <Option value="#141414">
               <Button shape="circle" size="small" style={{ backgroundColor: "#141414", color: "#141414", border: 0 }}>.</Button>
@@ -106,6 +99,34 @@ const ToolKit = (props) => {
           </Select>
           <Divider />
         </Space>
+
+        {/* lineWidth */}
+        <Space>
+          {/* <Radio.Group defaultValue="a" size="small">
+            <Radio.Button value="1">
+              <FaDotCircle size="xs" />
+            </Radio.Button>
+            <Radio.Button value="3">
+              <FaDotCircle size="lg" />
+            </Radio.Button>
+            <Radio.Button value="6">
+              <FaDotCircle />
+            </Radio.Button>
+          </Radio.Group> */}
+          <InputNumber min={1} max={10} defaultValue={1} onChange={handleLineWidthChange} />
+          <Divider />
+        </Space>
+
+
+        {/* <Space> */}
+        {/* <Slider
+          min={1}
+          max={10}
+          onChange={handleLineWidthChange}
+          defaultValue={1}
+        /> */}
+        {/* </Space> */}
+
 
         <p>Card content</p>
       </Card>
@@ -115,33 +136,3 @@ const ToolKit = (props) => {
 }
 
 export default ToolKit;
-
-// {/* <Radio.Group defaultValue="a" style={{ marginTop: 16 }}>
-//           <Radio.Button value="a">Hangzhou</Radio.Button>
-//           <Radio.Button value="b">Shanghai</Radio.Button>
-//           <Radio.Button value="c">Beijing</Radio.Button>
-//           <Radio.Button value="d">Chengdu</Radio.Button>
-//         </Radio.Group> */}
-
-// {/* 
-
-
-
-// {/* <Dropdown.Button
-//         visible={true}
-//         className="handle"
-//         overlay={Tools}
-//         placement="bottomCenter"
-//         icon={<UserOutlined />}
-//         style={{ position: "absolute", top: 20, left: 15 }}
-//       >
-//         Dropdown
-//       </Dropdown.Button> */}
-
-// {/* <div
-// // style={{ position: "absolute", zIndex: 1 }}
-// >
-//   <div className="handle" style={{ backgroundColor: "lightcoral" }}>Drag from here</div>
-//   <div>This readme is really dragging on...</div>
-// </div> */
-// }

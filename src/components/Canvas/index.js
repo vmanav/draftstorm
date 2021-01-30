@@ -3,7 +3,6 @@ import styled from "styled-components";
 import ToolKit from '../ToolKit';
 
 // const strokeColour = "black";
-const lineWidth = 1;
 
 const Canvas = (props) => {
 
@@ -17,6 +16,8 @@ const Canvas = (props) => {
 
 
   const [strokeColour, setStrokeColour] = useState("#141414");
+  const [lineWidth, setLineWidth] = useState(1);
+
 
   const handleResize = () => {
 
@@ -185,6 +186,9 @@ const Canvas = (props) => {
       </canvas>
       <ToolKit
         setStrokeColour={setStrokeColour}
+        lineWidth={lineWidth}
+        setLineWidth={setLineWidth}
+
       />
       {/* <button onClick={clearCanvas}>Clear Canvas</button> */}
     </>
