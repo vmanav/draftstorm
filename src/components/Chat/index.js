@@ -3,10 +3,8 @@ import { BrowserRouter as Redirect } from 'react-router-dom';
 import socketIOClient from 'socket.io-client';
 import queryString from 'query-string';
 import Canvas from '../Canvas';
-import { Row, Col } from 'antd';
 
-import 'antd/dist/antd.css';
-import './index.css';
+// import './index.css';
 
 const ENDPOINT = 'http://127.0.0.1:5000';
 

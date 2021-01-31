@@ -2,15 +2,27 @@ import React, { useState } from 'react';
 import Draggable from 'react-draggable';
 import { Card, Menu, Dropdown, Typography, Radio, Button, Select, Divider, Space, Slider, InputNumber, Switch, Tooltip } from 'antd';
 import { ToolOutlined, UserOutlined } from '@ant-design/icons';
-import { FaDotCircle } from "react-icons/fa";
+import { FaDotCircle, FaEraser } from "react-icons/fa";
+
+import 'antd/dist/antd.less';
 
 const { Option } = Select;
 
 const ToolKit = (props) => {
 
-  const { setStrokeColour, setLineWidth, setShadowBlur } = props;
+  const { setStrokeColour, setLineWidth, setShadowBlur, setEraserSelected, } = props;
   const [vis, setVis] = useState(false);
+  const [eraserButton, setEraserButton] = useState(false);
 
+
+  const handleEraserSelect = (value) => {
+    if (eraserButton) {
+      setEraserSelected(false);
+    } else {
+      setEraserSelected(true);
+    }
+    setEraserButton(!eraserButton);
+  }
 
   const handleStrokeColourChange = (value) => {
     // console.log("Changed : ", value);
@@ -45,9 +57,11 @@ const ToolKit = (props) => {
           <Button
             type="primary"
             shape="circle"
-            icon={<ToolOutlined />}
+
             onClick={() => setVis(!vis)}
-          />
+          >
+            <ToolOutlined />
+          </Button>
         }
         style={{ width: 140, borderRadius: 4, position: "absolute", top: 20, left: 15 }}
         className="handle"
@@ -101,6 +115,24 @@ const ToolKit = (props) => {
           <Tooltip placement="topRight" title={'Hightlight'}>
             <Switch onChange={onHighlightChange} size="small" />
           </Tooltip>
+          <Divider />
+        </Space>
+
+        <Space>
+          <Tooltip placement="right" title="Eraser">
+            {eraserButton ? (
+              <Button shape="circle" type="primary" onClick={handleEraserSelect} >
+                <FaEraser />
+              </Button>
+            ) : (
+                <Button shape="circle" type="primary" onClick={handleEraserSelect} ghost>
+                  <FaEraser />
+                </Button>
+              )}
+
+
+          </Tooltip>
+          <Divider />
         </Space>
 
         <p>Card content</p>

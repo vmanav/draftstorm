@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import styled from "styled-components";
 import ToolKit from '../ToolKit';
 
 const shadowBlurValue = 4;
@@ -17,6 +16,7 @@ const Canvas = (props) => {
   const [strokeColour, setStrokeColour] = useState("#141414");
   const [lineWidth, setLineWidth] = useState(1);
   const [shadowBlur, setShadowBlur] = useState(false);
+  const [eraserSelected, setEraserSelected] = useState(false);
 
 
   const handleResize = () => {
@@ -135,7 +135,9 @@ const Canvas = (props) => {
       ctx.shadowColor = 'rgba(252,163,17, 0.4)';
       ctx.beginPath();
       ctx.moveTo(payload.prevX - 1, payload.prevY - 1);
-      ctx.strokeStyle = payload.strokeColour;
+      ctx.strokeStyle = eraserSelected ? '#fbfef9' : payload.strokeColour;
+      // eraserSelected ? "#fbfef9" :
+      console.log("eraserSelected : ", eraserSelected);
       ctx.lineWidth = payload.lineWidth;
       ctx.lineTo(payload.prevX, payload.prevY);
       ctx.stroke();
@@ -159,7 +161,7 @@ const Canvas = (props) => {
           border: '1px solid red',
           width: '100vw',
           height: '100vh',
-          backgroundColor: '#f7ede2',
+          backgroundColor: '#fbfef9',
           // position: 'absolute'
         }}
         onMouseDown={(e) => handleMouseDown(e)}
@@ -176,10 +178,12 @@ const Canvas = (props) => {
       >
       </canvas>
       <ToolKit
+        // strokeColour={strokeColour}
         setStrokeColour={setStrokeColour}
         lineWidth={lineWidth}
         setLineWidth={setLineWidth}
         setShadowBlur={setShadowBlur}
+        setEraserSelected={setEraserSelected}
       />
     </>
   );
