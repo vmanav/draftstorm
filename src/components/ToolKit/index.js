@@ -1,21 +1,27 @@
 import React, { useState } from 'react';
 import Draggable from 'react-draggable';
-import { Card, Menu, Dropdown, Typography, Radio, Button, Select, Divider, Space, Slider, InputNumber, Switch, Tooltip } from 'antd';
-import { ToolOutlined, UserOutlined } from '@ant-design/icons';
-import { FaDotCircle, FaEraser } from "react-icons/fa";
+import { Card, Button, Select, Divider, Space, InputNumber, Switch, Tooltip } from 'antd';
+import { ToolOutlined, ClearOutlined, DownloadOutlined } from '@ant-design/icons';
+import { FaEraser } from "react-icons/fa";
+import ToolToogleButton from '../ToolToggleButton/index';
 
 import 'antd/dist/antd.less';
+
+const hiddenClass = {
+  display: "none"
+}
 
 const { Option } = Select;
 
 const ToolKit = (props) => {
 
-  const { setStrokeColour, setLineWidth, setShadowBlur, setEraserSelected, } = props;
+  const { setStrokeColour, setLineWidth, setShadowBlur, setEraserSelected, clearCanvas, downloadCanvasAsImage } = props;
   const [vis, setVis] = useState(false);
   const [eraserButton, setEraserButton] = useState(false);
 
 
-  const handleEraserSelect = (value) => {
+  const handleEraserSelect = () => {
+
     if (eraserButton) {
       setEraserSelected(false);
     } else {
@@ -25,20 +31,28 @@ const ToolKit = (props) => {
   }
 
   const handleStrokeColourChange = (value) => {
-    // console.log("Changed : ", value);
+
     setStrokeColour(value);
   }
 
   const handleLineWidthChange = (value) => {
-    // console.log("Changed : ", value);
+
     setLineWidth(value);
   }
 
   const onHighlightChange = (value) => {
-    // console.log("Changed : ", value);
+
     setShadowBlur(value);
   }
 
+  const handleClearCanvas = () => {
+    clearCanvas();
+  }
+
+  const handleDownload = () => {
+
+    downloadCanvasAsImage();
+  }
 
   return (
     <Draggable
@@ -54,21 +68,14 @@ const ToolKit = (props) => {
         title="DraftStorm"
         hoverable={true}
         extra={
-          <Button
-            type="primary"
-            shape="circle"
-
-            onClick={() => setVis(!vis)}
-          >
-            <ToolOutlined />
-          </Button>
+          <ToolToogleButton vis={vis} setVis={setVis} />
         }
         style={{ width: 140, borderRadius: 4, position: "absolute", top: 20, left: 15 }}
         className="handle"
       >
 
         {/* StrokeColour */}
-        <Space>
+        <Space style={vis ? {} : hiddenClass}>
           <Tooltip placement="topRight" title={'Colour'}>
             <Select
               defaultValue="#141414"
@@ -104,38 +111,59 @@ const ToolKit = (props) => {
         </Space>
 
         {/* lineWidth */}
-        <Space>
+        <Space style={vis ? {} : hiddenClass}>
           <Tooltip placement="topRight" title={'Size'}>
             <InputNumber min={1} max={10} defaultValue={1} onChange={handleLineWidthChange} />
           </Tooltip>
           <Divider />
         </Space>
 
-        <Space>
+        {/* Hightlight */}
+        <Space style={vis ? {} : hiddenClass}>
           <Tooltip placement="topRight" title={'Hightlight'}>
             <Switch onChange={onHighlightChange} size="small" />
           </Tooltip>
           <Divider />
         </Space>
 
-        <Space>
-          <Tooltip placement="right" title="Eraser">
-            {eraserButton ? (
+        {/* Eraser */}
+        <Space style={vis ? {} : hiddenClass}>
+          {eraserButton ? (
+            <Tooltip placement="right" title="Deselect Eraser">
               <Button shape="circle" type="primary" onClick={handleEraserSelect} >
                 <FaEraser />
               </Button>
-            ) : (
+            </Tooltip>
+          ) : (
+              <Tooltip placement="right" title="Select Eraser">
                 <Button shape="circle" type="primary" onClick={handleEraserSelect} ghost>
                   <FaEraser />
                 </Button>
-              )}
+              </Tooltip>
+            )}
+          <Divider />
+        </Space>
 
-
+        {/* Clear Canvas */}
+        <Space style={vis ? {} : hiddenClass}>
+          <Tooltip placement="right" title="Clear Canvas">
+            <Button type="primary" icon={<ClearOutlined />} onClick={handleClearCanvas}>
+              Reset
+          </Button>
           </Tooltip>
           <Divider />
         </Space>
 
-        <p>Card content</p>
+        {/* Download as PNG */}
+        <Space style={vis ? {} : hiddenClass}>
+          <Tooltip placement="right" title="Download as PNG">
+            <Button type="primary" icon={<DownloadOutlined />} onClick={handleDownload}>
+              Download
+          </Button>
+          </Tooltip>
+          <Divider />
+        </Space>
+
       </Card>
 
     </Draggable >

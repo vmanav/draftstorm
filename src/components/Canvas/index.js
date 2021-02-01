@@ -60,11 +60,22 @@ const Canvas = (props) => {
 
   }
 
-  // const clearCanvas = () => {
-  //   const canvas = canvasRef.current
-  //   const ctx = canvas.getContext('2d');
-  //   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  // }
+  const clearCanvas = () => {
+
+    const canvas = canvasRef.current
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
+  const downloadCanvasAsImage = () => {
+
+    const canvas = canvasRef.current;
+    const img = canvas.toDataURL();
+    var link = document.createElement('a');
+    link.download = 'cnvs_img.png';
+    link.href = img;
+    link.click();
+  }
 
   useEffect(() => {
 
@@ -90,7 +101,7 @@ const Canvas = (props) => {
     socket.emit('c_mouse_down', {
       prevX: prevX,
       prevY: prevY,
-      strokeColour: strokeColour,
+      strokeColour: eraserSelected ? '#fbfef9' : strokeColour,
       lineWidth: lineWidth,
       shadowBlur: shadowBlur
     })
@@ -133,11 +144,11 @@ const Canvas = (props) => {
       ctx.lineJoin = ctx.lineCap = 'round';
       ctx.shadowBlur = payload.shadowBlur ? shadowBlurValue : 0;
       ctx.shadowColor = 'rgba(252,163,17, 0.4)';
+      ctx.strokeStyle = payload.strokeColour;
       ctx.beginPath();
       ctx.moveTo(payload.prevX - 1, payload.prevY - 1);
-      ctx.strokeStyle = eraserSelected ? '#fbfef9' : payload.strokeColour;
       // eraserSelected ? "#fbfef9" :
-      console.log("eraserSelected : ", eraserSelected);
+      console.log("eraserSelected in s.'on' : ", eraserSelected);
       ctx.lineWidth = payload.lineWidth;
       ctx.lineTo(payload.prevX, payload.prevY);
       ctx.stroke();
@@ -178,12 +189,13 @@ const Canvas = (props) => {
       >
       </canvas>
       <ToolKit
-        // strokeColour={strokeColour}
         setStrokeColour={setStrokeColour}
         lineWidth={lineWidth}
         setLineWidth={setLineWidth}
         setShadowBlur={setShadowBlur}
         setEraserSelected={setEraserSelected}
+        clearCanvas={clearCanvas}
+        downloadCanvasAsImage={downloadCanvasAsImage}
       />
     </>
   );
