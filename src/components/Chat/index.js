@@ -3,6 +3,8 @@ import { BrowserRouter as Redirect } from 'react-router-dom';
 import socketIOClient from 'socket.io-client';
 import queryString from 'query-string';
 import Canvas from '../Canvas';
+import { Skeleton } from 'antd';
+
 
 // import './index.css';
 
@@ -83,7 +85,8 @@ const Chat = ({ location, history, match }) => {
         {sktLoaded ?
           (<Canvas socket={socket} />)
           :
-          (<>NO CANVAS</>)}
+          (<></>)
+        }
       </>
     )
   }

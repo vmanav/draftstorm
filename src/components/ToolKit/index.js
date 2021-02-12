@@ -5,7 +5,6 @@ import { ToolOutlined, ClearOutlined, DownloadOutlined } from '@ant-design/icons
 import { FaEraser } from "react-icons/fa";
 import ToolToogleButton from '../ToolToggleButton/index';
 
-import 'antd/dist/antd.less';
 
 const hiddenClass = {
   display: "none"
