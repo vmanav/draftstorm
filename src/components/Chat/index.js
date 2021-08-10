@@ -5,7 +5,6 @@ import queryString from 'query-string';
 import Canvas from '../Canvas';
 import { Skeleton } from 'antd';
 
-
 // import './index.css';
 
 const ENDPOINT = 'http://127.0.0.1:5000';
@@ -30,6 +29,9 @@ const Chat = ({ location, history, match }) => {
     // console.log("useEffect called");
 
     const { room, user } = queryString.parse(location.search);
+
+    console.log("room : ", room);
+    console.log("user : ", user);
     setRoom(room);
     setName(user);
 

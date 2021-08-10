@@ -5,8 +5,6 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Join from './components/Join';
 import Chat from './components/Chat';
 
-import './App.less';
-
 const ENDPOINT = "http://127.0.0.1:5000";
 
 
