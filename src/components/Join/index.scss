@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Style+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@600&display=swap");
 /* 1rem - 16px */
 html,
 body {
@@ -12,19 +14,26 @@ body {
 
 .join-container {
   height: 100%;
-  background-color: lightcoral;
+  background-color: #f2f2f2;
   padding: 2rem;
+  // position: relative;
 
-  div {
+  &__body {
     height: 100%;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   }
 
   &__first {
-    background-color: lightgreen;
+    background-color: #2e2f2f;
+    padding: 2rem;
+    // background-color: #fffffc;
+    position: relative;
+    color: white;
+    border: 2rem white solid;
   }
 
   &__second {
-    background-color: lightcyan;
+    background-color: #f2efea;
   }
 }
 
@@ -45,10 +54,56 @@ body {
   }
 
   &__element {
+    margin: 1.5rem 0 !important;
+  }
+
+  &__button {
     margin: 1rem 0 !important;
+    text-align: center;
+
+    .join-button {
+      padding: 0 2rem;
+    }
   }
 }
 
+.footer {
+  position: absolute;
+  text-align: center;
+  bottom: 0rem;
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.25rem 0;
+}
+
+.main-container {
+  &__upper {
+    font-size: 4rem;
+    margin-right: 4rem;
+    font-family: "Roboto Slab", serif;
+  }
+
+  &__lower {
+    font-size: 10rem;
+    font-family: "Style Script", cursive;
+    font-weight: bolder;
+    background: -webkit-linear-gradient(
+      90deg,
+      #00c0ff 0%,
+      #ffcf00 49%,
+      #fc4f4f 100%
+    );
+    background-image: linear-gradient(
+      90deg,
+      #00c0ff 0%,
+      #ffcf00 49%,
+      #fc4f4f 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
 /* 
 * {
   box-sizing: border-box;
