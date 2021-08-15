@@ -1,13 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
-import ToolKit from '../ToolKit';
 
+import ToolKit from '../ToolKit';
+import { MOUSE_EVENTS } from '../../utils';
 const shadowBlurValue = 4;
 
-const Canvas = (props) => {
+const Canvas = ({ socket }) => {
 
+  console.log("Canvas ka Socket : ", socket);
   let prevX, prevY, currX, currY;
   let pressed = false;
-  let { socket } = props;
   // console.log("SOCKET : ", socket);
 
   const canvasRef = useRef(null);
@@ -98,7 +99,7 @@ const Canvas = (props) => {
     prevX = e.pageX - canvas.getBoundingClientRect().left;
     prevY = e.pageY - canvas.getBoundingClientRect().top;
 
-    socket.emit('c_mouse_down', {
+    socket.emit(MOUSE_EVENTS.CLIENT_DOWN, {
       prevX: prevX,
       prevY: prevY,
       strokeColour: eraserSelected ? '#fbfef9' : strokeColour,
@@ -114,7 +115,7 @@ const Canvas = (props) => {
       currX = e.pageX - canvas.getBoundingClientRect().left;
       currY = e.pageY - canvas.getBoundingClientRect().top;
 
-      socket.emit('c_mouse_move', {
+      socket.emit(MOUSE_EVENTS.CLIENT_MOVE, {
         prevX: prevX,
         prevY: prevY,
         currX: currX,
@@ -139,7 +140,7 @@ const Canvas = (props) => {
     const canvas = canvasRef.current
     const ctx = canvas.getContext('2d')
 
-    socket.on('s_mouse_down', (payload) => {
+    socket.on(MOUSE_EVENTS.SERVER_DOWN, (payload) => {
       // console.log("stroke colour jo mila ", payload.strokeColour)
       ctx.lineJoin = ctx.lineCap = 'round';
       ctx.shadowBlur = payload.shadowBlur ? shadowBlurValue : 0;
@@ -155,15 +156,14 @@ const Canvas = (props) => {
     })
 
 
-    socket.on('s_mouse_move', (payload) => {
+    socket.on(MOUSE_EVENTS.SERVER_MOVE, (payload) => {
 
       ctx.moveTo(payload.prevX, payload.prevY);
       ctx.lineTo(payload.currX, payload.currY);
       ctx.stroke();
     })
 
-  }, [socket])
-
+  }, [socket, eraserSelected]);
 
   return (
     <>
@@ -180,7 +180,6 @@ const Canvas = (props) => {
         onMouseUp={handleMouseUp}
         onMouseOut={handleMouseOut}
         ref={canvasRef}
-        {...props}
       ></canvas>
       <canvas
         id="memCanvas"

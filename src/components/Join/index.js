@@ -1,128 +1,110 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 
-import { Layout, Row, Col, Input, Space, Form } from "antd";
+import { Typography } from 'antd';
+import {
+  Layout, Row, Col, Input, Space, Form, Divider, Button
+} from "antd";
+import {
+  CaretRightOutlined
+} from '@ant-design/icons';
 import "antd/dist/antd.less";
 import background from "../../bg.png";
 
-const { Header, Footer, Sider, Content, Breadcrumb, Divider, Button } = Layout;
-
+const { Title } = Typography;
+const { Content, } = Layout;
 var bgImgStyle = {
   backgroundImage: `url(${background})`,
   backgroundRepeat: "no-repeat",
   backgroundPosition: "right bottom",
 };
 
-const Join = () => {
-  const [name, setName] = useState("");
-  const [room, setRoom] = useState("");
+const Join = ({ userName, setUser }) => {
+  const [roomName, setRoomName] = useState("endgame");
+  const [roomsList, setRoomsList] = useState([]);
+
+  console.log("userName : ", userName);
+
+  const getListOfRooms = () => fetch('http://localhost:5000/rooms')
+    .then(data => data.json())
+    .then(data => {
+      setRoomsList(data.rooms)
+    })
+
+  useEffect(() => {
+    const rooms = getListOfRooms();
+    console.log("Rooms : ", rooms);
+  }, [])
 
   const handleClick = (e) => {
-    if (name === "" || room === "") {
+    if (userName.trim() === "" || roomName.trim() === "") {
       e.preventDefault();
+      alert("Error : Empty Username");
     }
   };
 
-  const [form] = Form.useForm();
-
-  const formItemLayout = {
-    labelCol: { span: 4 },
-    wrapperCol: { span: 14 },
-  };
-
-  const buttonItemLayout = {
-    wrapperCol: { span: 14, offset: 4 },
-  };
-
   return (
-    // style={bgImgStyle}
-    <div>
-      <Layout style={{ backgroundColor: "transparent" }}>
-        <Content
-          className="site-layout-background"
-          style={{
-            textAlign: "center",
-            height: "100vh",
-            // padding: 24,
-            backgroundColor: "transparent",
-          }}
-        >
-          <Row
-            justify="center"
-            style={{
-              height: "100vh",
-            }}
-          >
-            <Col
-              span={10}
-              style={{
-                backgroundColor: "#1e1e1e",
-                height: "100%",
-                padding: 35,
-                // paddingRight: 0,
-              }}
+    <div className="join-container">
+      <Row>
+        <Col className="join-container__first" span={18}>
+          col-12
+        </Col>
+        <Col className="join-container__second" span={6}>
+          <div className="input-container">
+            <Title
+              className="input-container__heading"
+              level={3}
             >
-              <Content
-                style={{
-                  backgroundColor: "white",
-                  // borderRadius: 5,
-                  height: "100%",
-                }}
-              >
-                <Space>
-                  <Input placeholder="Name" />
-                </Space>
-
-                <Space>
-                  <Input placeholder="Basic usage" />
-                </Space>
-              </Content>
-            </Col>
-            <Col
-              span={14}
-              style={{
-                backgroundColor: "white",
-                height: "100%",
-                padding: 35,
-                paddingLeft: 0,
-              }}
-            >
-              <Content
-                style={{
-                  // borderRadius: 5,
-                  backgroundColor: "#1e1e1e",
-                  height: "100%",
-                  // backgroundImage
-                  backgroundImage: `url(${background})`,
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "center center",
-                  // backgroundSize: "100% 100%",
-                  backgroundSize: "contain",
-                }}
-              >
-                askdhahjkd
-              </Content>
-            </Col>
-          </Row>
-          {/* <Footer >Ant Design ©2018 Created by Ant UED</Footer> */}
-        </Content>
-      </Layout>
-    </div>
+              Start Drafting Now!
+            </Title>
+            <Input
+              placeholder="Name"
+              className="input-container__element"
+              value={userName}
+              onChange={(e) => setUser(e.target.value)}
+            />
+            <Input
+              placeholder="Basic usage"
+              className="input-container__element"
+              value={roomName}
+              onChange={(e) => setRoomName(e.target.value)}
+            />
+            <Link className="input-container__element" to={`/chat/${roomName}`}>
+              <Button type="primary" shape="round" size='large' onClick={handleClick}>
+                Join Room <CaretRightOutlined />
+              </Button>
+              {/* <button className="button" type="submit">Start Drafting In</button> */}
+            </Link>
+          </div>
+        </Col>
+      </Row>
+    </div >
+    //   <>
+    //     <div>
+    //       <Space>
+    //         <Input
+    //           placeholder="Name"
+    //           value={userName}
+    //           onChange={(e) => setUser(e.target.value)}
+    //         />
+    //       </Space>
+    //       <Space>
+    //         <Input placeholder="Basic usage"
+    //           value={roomName}
+    //           onChange={(e) => setRoomName(e.target.value)}
+    //         />
+    //       </Space>
+    //       <Link to={`/chat/${roomName}`}>
+    //         <button className="button mt-20" type="submit">Start Drafting In</button>
+    //       </Link>
+    //     </div>
+    //     <div>
+    //       {roomsList.map((roomName) => <p>`${roomName}`</p>)}
+    //       {roomsList.length === 0 ? 'No Rooms at Present' : ''}
+    //     </div>
+    //   </>
+    // 
   );
 };
 
 export default Join;
-// <div className="outerContainer">
-//   <div className="innerContainer">
-//     <h1>Join</h1>
-//     <div>
-//       <input type="text" placeholder="Name" className="nameInput" onChange={(e) => setName(e.target.value)} />
-//     </div>
-//     <div>
-//       <input type="text" placeholder="Room" className="roomInput" onChange={(e) => setRoom(e.target.value)} />
-//     </div>
-//     <Link onClick={(e) => handleClick(e)} to={`/ chat ? room = ${ room }& user=${ name } `}>
-//       <button className="button mt-20" type="submit">Sign In</button>
-//     </Link>
-//   </div>
-// </div >

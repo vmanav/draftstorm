@@ -1,6 +1,7 @@
+/* 1rem - 16px */
 html,
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   padding: 0;
   margin: 0;
 }
@@ -9,6 +10,46 @@ body {
   height: 100vh;
 }
 
+.join-container {
+  height: 100%;
+  background-color: lightcoral;
+  padding: 2rem;
+
+  div {
+    height: 100%;
+  }
+
+  &__first {
+    background-color: lightgreen;
+  }
+
+  &__second {
+    background-color: lightcyan;
+  }
+}
+
+.input-container {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__heading {
+    text-align: center;
+    margin-bottom: 4rem !important;
+  }
+
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__element {
+    margin: 1rem 0 !important;
+  }
+}
+
+/* 
 * {
   box-sizing: border-box;
 }
@@ -69,4 +110,4 @@ body {
 
 button:focus {
   outline: 0;
-}
+} */

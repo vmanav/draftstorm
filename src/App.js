@@ -1,29 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import socketIOClient from "socket.io-client";
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, } from 'react-router-dom';
 
+import ChatWrapper from './components/ChatWrapper';
 import Join from './components/Join';
-import Chat from './components/Chat';
 
-const ENDPOINT = "http://127.0.0.1:5000";
-
-
-function App() {
-
-  const [res, setRes] = useState("");
-
-  // useEffect(() => {
-  //   console.log("useEff CALLED")
-  //   const socket = socketIOClient(ENDPOINT);
-  //   socket.on("FromAPI", data => {
-  //     setRes(data);
-  //   });
-  // }, []);
-
+const App = () => {
+  const [user, setUser] = useState("");
   return (
     <Router>
-      <Route path="/" exact component={Join} />
-      <Route path="/chat" component={Chat} />
+      <Route path="/" exact>
+        <Join userName={user} setUser={setUser} />
+      </Route>
+      <Route path="/chat/:room" >
+        <ChatWrapper user={user} setUser={setUser} />
+      </Route>
     </Router>
   );
 }

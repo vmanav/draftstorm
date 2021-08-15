@@ -66,9 +66,7 @@ const ToolKit = (props) => {
         size="small"
         title="DraftStorm"
         hoverable={true}
-        extra={
-          <ToolToogleButton vis={vis} setVis={setVis} />
-        }
+        extra={<ToolToogleButton vis={vis} setVis={setVis} />}
         style={{ width: 140, borderRadius: 4, position: "absolute", top: 20, left: 15 }}
         className="handle"
       >
@@ -134,12 +132,12 @@ const ToolKit = (props) => {
               </Button>
             </Tooltip>
           ) : (
-              <Tooltip placement="right" title="Select Eraser">
-                <Button shape="circle" type="primary" onClick={handleEraserSelect} ghost>
-                  <FaEraser />
-                </Button>
-              </Tooltip>
-            )}
+            <Tooltip placement="right" title="Select Eraser">
+              <Button shape="circle" type="primary" onClick={handleEraserSelect} ghost>
+                <FaEraser />
+              </Button>
+            </Tooltip>
+          )}
           <Divider />
         </Space>
 
@@ -148,7 +146,7 @@ const ToolKit = (props) => {
           <Tooltip placement="right" title="Clear Canvas">
             <Button type="primary" icon={<ClearOutlined />} onClick={handleClearCanvas}>
               Reset
-          </Button>
+            </Button>
           </Tooltip>
           <Divider />
         </Space>
@@ -158,7 +156,7 @@ const ToolKit = (props) => {
           <Tooltip placement="right" title="Download as PNG">
             <Button type="primary" icon={<DownloadOutlined />} onClick={handleDownload}>
               Download
-          </Button>
+            </Button>
           </Tooltip>
           <Divider />
         </Space>
