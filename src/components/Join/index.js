@@ -3,23 +3,18 @@ import { Link } from 'react-router-dom';
 
 import { Typography } from 'antd';
 import {
-  Layout, Row, Col, Input, Space, Form, Divider, Button
+  Button, Col, Input, Row, Space,
 } from "antd";
-import Icon from '@ant-design/icons';
-
 import {
   CaretRightOutlined, GithubFilled, LinkedinFilled,
 } from '@ant-design/icons';
+import Icon from '@ant-design/icons';
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 import "antd/dist/antd.less";
-import background from "../../bg.png";
 
 const { Title } = Typography;
-const { Content, } = Layout;
-var bgImgStyle = {
-  backgroundImage: `url(${background})`,
-  backgroundRepeat: "no-repeat",
-  backgroundPosition: "right bottom",
-};
 
 const Footer = () => {
   const socials = [
@@ -76,7 +71,14 @@ const Join = ({ userName, setUser }) => {
   const handleClick = (e) => {
     if (userName.trim() === "" || roomName.trim() === "") {
       e.preventDefault();
-      alert("Error : Empty Username");
+      toast.error('Username/ Roomname can\'t be empty.', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     }
   };
 
@@ -102,7 +104,11 @@ const Join = ({ userName, setUser }) => {
                 className="input-container__heading"
                 level={3}
               >
-                Start Drafting Now!
+                Start
+                <span
+                  className="input-container__heading input-container__heading--styled"
+                >Drafting</span>
+                Now!
               </Title>
               <Input
                 placeholder="Name"
@@ -135,6 +141,7 @@ const Join = ({ userName, setUser }) => {
         {roomsList.map((roomName) => <p>`${roomName}`</p>)}
         {roomsList.length === 0 ? 'No Rooms at Present' : ''}
       </div>
+      <ToastContainer />
     </>
   );
 };
