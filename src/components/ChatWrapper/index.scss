@@ -1,0 +1,13 @@
+.chat-wrapper {
+  &__modal {
+    .ant-modal-title {
+      padding: 0 0.3rem;
+      letter-spacing: 0.05rem;
+      font-weight: bold;
+    }
+  }
+
+  &__modal-title {
+    letter-spacing: 0.1rem;
+  }
+}

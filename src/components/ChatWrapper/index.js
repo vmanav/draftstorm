@@ -1,17 +1,40 @@
-import React, { useState, useEffect, useRef, createRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Route, useParams } from 'react-router-dom';
 import socketIOClient from 'socket.io-client';
 
-import { Modal, Input } from 'antd';
+import { Input, Modal, Skeleton } from 'antd';
+import { MESSAGE_CLASSES, MESSAGE_TYPES, } from '../../utils';
+import { ToastContainer, toast } from 'react-toastify';
 import Canvas from '../Canvas';
-import { MESSAGE_TYPES } from '../../utils';
 
 const ENDPOINT = 'http://127.0.0.1:5000';
 
-const Loading = () => <p> Loading ...</p>;
+const LoadingSkeleton = () => <Skeleton paragraph={{ rows: 4 }} />
+
+const sendNotifications = (text, type) => {
+  const notificationParams = {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  };
+  switch (type) {
+    case MESSAGE_CLASSES.RED_FLAG:
+      toast.error(text, notificationParams);
+      break;
+    case MESSAGE_CLASSES.GREEN_FLAG:
+      toast.success(text, notificationParams);
+      break;
+    default:
+      toast.success(text, notificationParams);
+      break;
+  }
+}
 
 const ChatWrapper = ({ user, setUser }) => {
-  // console.log("User : ", user);
   const [inputModalOpen, setInputModalOpen] = useState(true);
   const [modalInput, setModalInput] = useState(user);
 
@@ -20,30 +43,38 @@ const ChatWrapper = ({ user, setUser }) => {
   const denied = user.trim() === "";
 
   return (
-    <Route>
-      {denied ?
-        (
-          <Modal
-            title="One musn't Proceed without a Username, or worst take someone else's."
-            visible={inputModalOpen}
-            onOk={() => setUser(modalInput)}
-            onCancel={() => setInputModalOpen(false)}
-          >
-            <p>I command you to take another username</p>
-            <Input
-              placeholder="#BeWhatEverYouWantToBe"
-              value={modalInput}
-              onChange={(e) => setModalInput(e.target.value)}
-            />
-          </Modal>
-        ) :
-        <Chat
-          user={user}
-          room={room}
-          setUser={setUser}
-        />
-      }
-    </Route >
+    <div className="chat-wrapper">
+      <Route>
+        {denied ?
+          (
+            <Modal
+              title="One musn't Proceed without a Username, or worst take someone else's."
+              visible={inputModalOpen}
+              onOk={() => setUser(modalInput)}
+              cancelButtonProps={{ disabled: true }}
+              className="chat-wrapper__modal"
+              closable={false}
+              centered
+            >
+              <p className="chat-wrapper__modal-title">
+                <b>I command you to take another username!</b>
+              </p>
+              <Input
+                placeholder="#BeWhomSoEverYouWantToBe"
+                value={modalInput}
+                onChange={(e) => setModalInput(e.target.value)}
+              />
+            </Modal>
+          ) :
+          <Chat
+            user={user}
+            room={room}
+            setUser={setUser}
+          />
+        }
+      </Route >
+      <ToastContainer />
+    </div>
   );
 }
 
@@ -53,7 +84,6 @@ const Chat = ({ user, room, setUser }) => {
   const [socketLoaded, setSocketLoaded] = useState(false);
 
   const socketRef = useRef(undefined);
-
 
   useEffect(() => {
     socketRef.current = socketIOClient(ENDPOINT);
@@ -65,31 +95,23 @@ const Chat = ({ user, room, setUser }) => {
     })
 
     socket.on(MESSAGE_TYPES.ERROR, (data) => {
-      // setUserNotf(data.text);
-      alert(data.text);
-      console.log("notification : ", data.text);
-      setUser("");
+      sendNotifications(data.text, data.type);
     })
 
     socket.on(MESSAGE_TYPES.NOTIFICATION, (data) => {
-      // setUserNotf(data.text);
-      alert(data.text);
-      console.log("notification : ", data.text);
+      sendNotifications(data.text, data.type);
     })
 
-    // Cleanup 
-    // return (() => {
-    //   // socket.emit('disconnect');
-    //   socket.off();
-    // })
+    return (() => {
+      socket.off();
+    })
   }, [room, user, setUser])
 
   return (
     <>
-      {socketLoaded ? (<Canvas socket={socketRef.current} />) : (<Loading />)}
+      {socketLoaded ? (<Canvas socket={socketRef.current} />) : (<LoadingSkeleton />)}
     </>
   )
 };
-
 
 export default ChatWrapper;

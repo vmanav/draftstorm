@@ -8,8 +8,8 @@ import {
 import {
   CaretRightOutlined, GithubFilled, LinkedinFilled,
 } from '@ant-design/icons';
-import Icon from '@ant-design/icons';
 import { ToastContainer, toast } from 'react-toastify';
+import Icon from '@ant-design/icons';
 
 import 'react-toastify/dist/ReactToastify.css';
 import "antd/dist/antd.less";
