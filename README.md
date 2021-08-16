@@ -1,5 +1,5 @@
 <h1 align="center">DraftStorm</h1>
-<h4 align="center">Draftting Daily.</h4>
+<h4 align="center">Drafting Daily.</h4>
 
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
@@ -29,11 +29,11 @@ The functionalities supported are stated below :
 
 ## CodeBase
 
-- Frontend Repository : [DraftStorm-Client](https://github.com/vmanav/draftstorm-client)
+- Frontend Repository : [DraftStorm-Client](#)
   <br/>
 - Backend Repository : [DraftStorm-Server](https://github.com/vmanav/draftstorm-server)
 
-## Install
+## Installation and Usage
 
 ### Frontend
 
@@ -49,6 +49,21 @@ The functionalities supported are stated below :
 #### 3. Start Project
 
     craco start
+
+### Backend
+
+#### 1. Clone the Repository
+
+    https://github.com/vmanav/draftstorm-server.git
+    cd draftstorm-server
+
+#### 2. Install Dependencies
+
+    npm  i
+
+#### 3. Start Project
+
+    npm start
 
 ## Gallery
 
