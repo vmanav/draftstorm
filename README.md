@@ -1,70 +1,88 @@
-# Getting Started with Create React App
+<h1 align="center">DraftStorm</h1>
+<h4 align="center">Draftting Daily.</h4>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p>
+  <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
+  <a href="https://github.com/vmanav/draftstorm-client/graphs/commit-activity" target="_blank">
+    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
+  </a>
+  <a href="https://github.com/vmanav/draftstorm-client/blob/master/LICENSE" target="_blank">
+    <img alt="License: MIT" src="https://img.shields.io/github/license/vmanav/draftstorm-client" />
+  </a>
+</p>
 
-## Available Scripts
+### 🏠 [Homepage](https://github.com/vmanav/draftstorm-client#readme)
 
-In the project directory, you can run:
+## About the Project
 
-### `yarn start`
+DraftStorm is a React and Node.js and based Socket.IO powered based real canvas application.
+<br/>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The functionalities supported are stated below :
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```
+- Real Time Canvas Drawing Tool.
+- Room Architecture for seperate user base at real time.
+- Great choice of pallet and tools available.
+- User Entering/Leaving Room Notifications to all users.
+```
 
-### `yarn test`
+## CodeBase
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Frontend Repository : [DraftStorm-Client](https://github.com/vmanav/draftstorm-client)
+  <br/>
+- Backend Repository : [DraftStorm-Server](https://github.com/vmanav/draftstorm-server)
 
-### `yarn build`
+## Install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Frontend
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### 1. Clone the Repository
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    https://github.com/vmanav/draftstorm-client.git
+    cd draftstorm-client
 
-### `yarn eject`
+#### 2. Install Dependencies
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+    npm  i
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### 3. Start Project
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+    craco start
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Gallery
 
-## Learn More
+| ![DraftStorm Demo](/public/demo.png) |
+| :----------------------------------: |
+|          _DraftStorm Demo_           |
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+| ![DraftStorm Home](/public/home.png) |
+| :----------------------------------: |
+|          _DraftStorm Home_           |
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+| ![DraftStorm Username Validation](/public/validation.png) |
+| :-------------------------------------------------------: |
+|             _DraftStorm Username Validation_              |
 
-### Code Splitting
+| ![DraftStorm Toolkit](/public/toolkit.png) |
+| :----------------------------------------: |
+|            _DraftStorm Toolkit_            |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Author
 
-### Analyzing the Bundle Size
+👤 **Manav Verma**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Github: [@vmanav](https://github.com/vmanav)
+- LinkedIn: [@vmanav](https://linkedin.com/in/vmanav)
 
-### Making a Progressive Web App
+## 🤝 Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/vmanav/draftstorm-client/issues). You can also take a look at the [contributing guide](https://github.com/vmanav/draftstorm-client/blob/master/CONTRIBUTING.md).
 
-### Advanced Configuration
+## Show your support
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Give a ⭐️ if this project helped you!
 
-### Deployment
+## 📝 License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is [MIT](https://github.com/vmanav/draftstorm-client/blob/master/LICENSE) licensed.
