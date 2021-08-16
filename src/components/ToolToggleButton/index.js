@@ -1,9 +1,6 @@
-import React, { useState } from 'react';
-import Draggable from 'react-draggable';
-import { Card, Button, Select, Divider, Space, InputNumber, Switch, Tooltip } from 'antd';
-import { ToolOutlined, ClearOutlined, DownloadOutlined } from '@ant-design/icons';
-import { FaEraser } from "react-icons/fa";
-
+import React from 'react';
+import { Button, Tooltip } from 'antd';
+import { ToolOutlined } from '@ant-design/icons';
 
 const ToolToogleButton = (props) => {
   const { vis, setVis } = props;
@@ -18,17 +15,17 @@ const ToolToogleButton = (props) => {
       </Button>
     </Tooltip>
   ) : (
-      <Tooltip placement="right" title="Open Tools">
-        <Button
-          type="primary"
-          shape="circle"
-          ghost
-          onClick={() => setVis(!vis)}
-        >
-          <ToolOutlined />
-        </Button>
-      </Tooltip>
-    ))
+    <Tooltip placement="right" title="Open Tools">
+      <Button
+        type="primary"
+        shape="circle"
+        ghost
+        onClick={() => setVis(!vis)}
+      >
+        <ToolOutlined />
+      </Button>
+    </Tooltip>
+  ))
 };
 
 export default ToolToogleButton;

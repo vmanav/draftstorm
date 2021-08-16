@@ -5,11 +5,9 @@ import { MOUSE_EVENTS } from '../../utils';
 const shadowBlurValue = 4;
 
 const Canvas = ({ socket }) => {
-
   console.log("Canvas ka Socket : ", socket);
   let prevX, prevY, currX, currY;
   let pressed = false;
-  // console.log("SOCKET : ", socket);
 
   const canvasRef = useRef(null);
   const memCanvasRef = useRef(null);
@@ -26,8 +24,6 @@ const Canvas = ({ socket }) => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
 
-    // console.log("=> ctx", ctx);
-
     var memCanvas = memCanvasRef.current;
     var memCtx = memCanvas.getContext('2d');
 
@@ -36,7 +32,6 @@ const Canvas = ({ socket }) => {
     let oldHeight = canvas.height;
     let newWidth = canvas.parentElement.clientWidth;
     let newHeight = canvas.parentElement.clientHeight;
-
 
     // Change Memory Canvas Width
     memCanvas.width = newWidth;
@@ -52,13 +47,11 @@ const Canvas = ({ socket }) => {
     canvas.height = newHeight;
     ctx.drawImage(memCanvas, 0, 0);
 
-
     // ctx.canvas.width = 0.95 * window.innerWidth;
     // ctx.canvas.height = 0.95 * window.innerHeight;
 
     // ctx.canvas.width = canvas.parentElement.clientWidth;
     // ctx.canvas.height = canvas.parentElement.clientHeight;
-
   }
 
   const clearCanvas = () => {

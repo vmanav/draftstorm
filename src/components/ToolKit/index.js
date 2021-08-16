@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import Draggable from 'react-draggable';
 import { Card, Button, Select, Divider, Space, InputNumber, Switch, Tooltip } from 'antd';
-import { ToolOutlined, ClearOutlined, DownloadOutlined } from '@ant-design/icons';
+import { ClearOutlined, DownloadOutlined } from '@ant-design/icons';
 import { FaEraser } from "react-icons/fa";
 import ToolToogleButton from '../ToolToggleButton/index';
-
 
 const hiddenClass = {
   display: "none"
