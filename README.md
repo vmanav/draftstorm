@@ -67,7 +67,7 @@ The functionalities supported are stated below :
 
 ## Gallery
 
-| ![DraftStorm Demo](/public/demo.png) |
+| ![DraftStorm Demo](/public/Demo.gif) |
 | :----------------------------------: |
 |          _DraftStorm Demo_           |
 
