@@ -28,6 +28,15 @@ The functionalities supported are stated below :
 - Get List of active Rooms at present.
 ```
 
+<br>
+<details>
+  <summary>⭐️  &nbsp;Want to check out the Classic Version(v0) 🎨  ? </summary>
+  <a href="https://github.com/vmanav/The-Marauders-Canvas">
+  Visit Here : The Marauder's Canvas
+  </a>
+</details>
+<br>
+
 ## CodeBase
 
 - Frontend Repository : [DraftStorm-Client](#)
