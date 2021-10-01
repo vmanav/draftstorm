@@ -28,6 +28,10 @@ The functionalities supported are stated below :
 - Get List of active Rooms at present.
 ```
 
+### What's great ?
+
+- Super Quick and Easy room joining, just share `https://domain/chat/roomName`.
+
 <br>
 <details>
   <summary>⭐️  &nbsp;Want to check out the Classic Version(v0) 🎨  ? </summary>

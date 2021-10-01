@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 
 import { Typography } from 'antd';
@@ -53,20 +53,20 @@ const Footer = () => {
 
 const Join = ({ userName, setUser }) => {
   const [roomName, setRoomName] = useState("endgame");
-  const [roomsList, setRoomsList] = useState([]);
+  // const [roomsList, setRoomsList] = useState([]);
 
   console.log("userName : ", userName);
 
-  const getListOfRooms = () => fetch('http://localhost:5000/rooms')
-    .then(data => data.json())
-    .then(data => {
-      setRoomsList(data.rooms)
-    })
+  // const getListOfRooms = () => fetch('http://localhost:5000/rooms')
+  //   .then(data => data.json())
+  //   .then(data => {
+  //     setRoomsList(data.rooms)
+  //   })
 
-  useEffect(() => {
-    const rooms = getListOfRooms();
-    console.log("Rooms : ", rooms);
-  }, [])
+  // useEffect(() => {
+  //   const rooms = getListOfRooms();
+  //   console.log("Rooms : ", rooms);
+  // }, [])
 
   const handleClick = (e) => {
     if (userName.trim() === "" || roomName.trim() === "") {
@@ -137,10 +137,10 @@ const Join = ({ userName, setUser }) => {
           </Col>
         </Row>
       </div>
-      <div>
+      {/* <div>
         {roomsList.map((roomName) => <p>`${roomName}`</p>)}
         {roomsList.length === 0 ? 'No Rooms at Present' : ''}
-      </div>
+      </div> */}
       <ToastContainer />
     </>
   );
