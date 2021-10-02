@@ -7,8 +7,6 @@ import { MESSAGE_CLASSES, MESSAGE_TYPES, } from '../../utils';
 import { ToastContainer, toast } from 'react-toastify';
 import Canvas from '../Canvas';
 
-const ENDPOINT = 'http://127.0.0.1:5000';
-
 const LoadingSkeleton = () => <Skeleton paragraph={{ rows: 4 }} />
 
 const sendNotifications = (text, type) => {
@@ -35,7 +33,6 @@ const sendNotifications = (text, type) => {
 }
 
 const ChatWrapper = ({ user, setUser }) => {
-  const [inputModalOpen, setInputModalOpen] = useState(true);
   const [modalInput, setModalInput] = useState(user);
 
   let { room } = useParams();
@@ -49,7 +46,7 @@ const ChatWrapper = ({ user, setUser }) => {
           (
             <Modal
               title="One musn't Proceed without a Username, or worst take someone else's."
-              visible={inputModalOpen}
+              visible={true}
               onOk={() => setUser(modalInput)}
               cancelButtonProps={{ disabled: true }}
               className="chat-wrapper__modal"
@@ -86,7 +83,7 @@ const Chat = ({ user, room, setUser }) => {
   const socketRef = useRef(undefined);
 
   useEffect(() => {
-    socketRef.current = socketIOClient(ENDPOINT);
+    socketRef.current = socketIOClient('/');
     setSocketLoaded(true);
     const socket = socketRef.current;
     socket.emit(MESSAGE_TYPES.JOIN_ROOM, {

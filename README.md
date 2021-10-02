@@ -3,15 +3,15 @@
 
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
-  <a href="https://github.com/vmanav/draftstorm-client/graphs/commit-activity" target="_blank">
+  <a href="https://github.com/vmanav/draftstorm/graphs/commit-activity" target="_blank">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
   </a>
-  <a href="https://github.com/vmanav/draftstorm-client/blob/master/LICENSE" target="_blank">
-    <img alt="License: MIT" src="https://img.shields.io/github/license/vmanav/draftstorm-client" />
+  <a href="https://github.com/vmanav/draftstorm/blob/master/LICENSE" target="_blank">
+    <img alt="License: MIT" src="https://img.shields.io/github/license/vmanav/draftstorm" />
   </a>
 </p>
 
-### 🏠 [Homepage](https://github.com/vmanav/draftstorm-client#readme)
+### 🏠 [Homepage](https://github.com/vmanav/draftstorm#readme)
 
 ## About the Project
 
@@ -41,59 +41,38 @@ The functionalities supported are stated below :
 </details>
 <br>
 
-## CodeBase
-
-- Frontend Repository : [DraftStorm-Client](#)
-  <br/>
-- Backend Repository : [DraftStorm-Server](https://github.com/vmanav/draftstorm-server)
-
 ## Installation and Usage
 
-### Frontend
-
 #### 1. Clone the Repository
 
-    https://github.com/vmanav/draftstorm-client.git
-    cd draftstorm-client
+    https://github.com/vmanav/draftstorm.git
+    cd draftstorm
 
 #### 2. Install Dependencies
 
-    npm  i
+    npm i && cd client && npm i
 
 #### 3. Start Project
 
-    craco start
+    cd client && npm run build
 
-### Backend
-
-#### 1. Clone the Repository
-
-    https://github.com/vmanav/draftstorm-server.git
-    cd draftstorm-server
-
-#### 2. Install Dependencies
-
-    npm  i
-
-#### 3. Start Project
-
-    npm start
+    cd ../ && npm start
 
 ## Gallery
 
-| ![DraftStorm Demo](/public/Demo.gif) |
+| ![DraftStorm Demo](/assets/Demo.gif) |
 | :----------------------------------: |
 |          _DraftStorm Demo_           |
 
-| ![DraftStorm Home](/public/home.png) |
+| ![DraftStorm Home](/assets/home.png) |
 | :----------------------------------: |
 |          _DraftStorm Home_           |
 
-| ![DraftStorm Username Validation](/public/validation.png) |
+| ![DraftStorm Username Validation](/assets/validation.png) |
 | :-------------------------------------------------------: |
 |             _DraftStorm Username Validation_              |
 
-| ![DraftStorm Toolkit](/public/toolkit.png) |
+| ![DraftStorm Toolkit](/assets/toolkit.png) |
 | :----------------------------------------: |
 |            _DraftStorm Toolkit_            |
 
@@ -106,7 +85,7 @@ The functionalities supported are stated below :
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/vmanav/draftstorm-client/issues). You can also take a look at the [contributing guide](https://github.com/vmanav/draftstorm-client/blob/master/CONTRIBUTING.md).
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/vmanav/draftstorm/issues). You can also take a look at the [contributing guide](https://github.com/vmanav/draftstorm/blob/master/CONTRIBUTING.md).
 
 ## Show your support
 
@@ -114,4 +93,4 @@ Give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-This project is [MIT](https://github.com/vmanav/draftstorm-client/blob/master/LICENSE) licensed.
+This project is [MIT](https://github.com/vmanav/draftstorm/blob/master/LICENSE) licensed.
