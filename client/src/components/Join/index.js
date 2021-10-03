@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 
-import { Button, Col, Input, Row } from "antd";
+import { Button, Col, Input, Row, Tooltip } from "antd";
 import { CaretRightOutlined } from '@ant-design/icons';
 import { ToastContainer, toast } from 'react-toastify';
 import Footer from './Footer';
@@ -51,20 +51,24 @@ const Join = ({ userName, setUser }) => {
             </div>
             <Row justify="center" className="input-container">
               <Col span={5}>
-                <Input
-                  placeholder="Name"
-                  className="input-container__element"
-                  value={userName}
-                  onChange={(e) => setUser(e.target.value)}
-                />
+                <Tooltip title="This will be your username!" color='#F9A620' placement="left">
+                  <Input
+                    placeholder="Name"
+                    className="input-container__element"
+                    value={userName}
+                    onChange={(e) => setUser(e.target.value)}
+                  />
+                </Tooltip>
               </Col>
               <Col span={5} offset={1}>
-                <Input
-                  placeholder="Basic usage"
-                  className="input-container__element"
-                  value={roomName}
-                  onChange={(e) => setRoomName(e.target.value)}
-                />
+                <Tooltip title="This will be your room!" color='#F9A620' placement="right">
+                  <Input
+                    placeholder="Basic usage"
+                    className="input-container__element"
+                    value={roomName}
+                    onChange={(e) => setRoomName(e.target.value)}
+                  />
+                </Tooltip>
               </Col>
             </Row>
             <Link to={`/chat/${roomName}`}>
