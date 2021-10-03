@@ -13,9 +13,9 @@
 
 ### 🏠 [Homepage](https://github.com/vmanav/draftstorm#readme)
 
-## About the Project
+## About the Product
 
-DraftStorm is a React and Node.js and based Socket.IO powered based real canvas application.
+DraftStorm is a React and Node.js and based Socket.IO powered based real-time canvas product.
 <br/>
 
 The functionalities supported are stated below :
@@ -30,7 +30,7 @@ The functionalities supported are stated below :
 
 ### What's great ?
 
-- Super Quick and Easy room joining, just share `https://domain/chat/roomName`.
+- Super Quick and Easy room joining, just share `https://draftstorm.herokuapp.com/chat/roomName`.
 
 <br>
 <details>
@@ -94,3 +94,5 @@ Give a ⭐️ if this project helped you!
 ## 📝 License
 
 This project is [MIT](https://github.com/vmanav/draftstorm/blob/master/LICENSE) licensed.
+
+> NOTE : [draftstorm-server](https://github.com/vmanav/draftstorm-server) was the seperate backend repository for this, which is now deprecated.
