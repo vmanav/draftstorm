@@ -5,7 +5,8 @@ import ChatWrapper from './components/ChatWrapper';
 import Join from './components/Join';
 
 import 'react-toastify/dist/ReactToastify.css';
-import "antd/dist/antd.less";
+import 'antd/dist/antd.css';
+import './antd-overrides.scss';
 
 const App = () => {
   const [user, setUser] = useState("");

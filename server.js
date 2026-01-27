@@ -4,14 +4,13 @@ const socket = require('socket.io')
 const http = require('http')
 const path = require("path")
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 const cors = require('cors');
 
 const app = express();
 
 app.use(cors());
-app.use(express.static(path.join(__dirname, "client", "build")))
 
 const server = http.createServer(app);
 

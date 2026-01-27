@@ -1,0 +1,28 @@
+// Primary button
+.ant-btn-primary {
+    background-color: #40916c;
+    border-color: #40916c;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+    background-color: #357a58;
+    border-color: #357a58;
+}
+
+// Secondary-ish style (you can target a specific custom class you use)
+.my-secondary-button {
+    background-color: #E26D5C;
+    border-color: #E26D5C;
+    color: #fff;
+}
+
+// Links
+.ant-btn-link,
+.ant-typography a {
+    color: #40916c;
+}
+
+.ant-typography a:hover {
+    color: #357a58;
+}
